@@ -1,5 +1,5 @@
 import React from 'react'
-import { FiLogIn } from 'react-icons/fi'
+import { FiPlus, FiMenu } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 import logo from '../../assets/logo.svg'
@@ -17,8 +17,12 @@ const Home = ()=>{
                     <h1>Seu marketplace de coleta de Resíduos.</h1>
                     <p>Ajudamos pessoas a encontrarem pontos de coletas de forma eficiente.</p>
                     <Link to="/create-point">
-                        <span><FiLogIn/></span>
+                        <span><FiPlus/></span>
                         <strong>Cadastre um ponto de coleta</strong>
+                    </Link>
+                    <Link to="/filter-points">
+                        <span><FiMenu/></span>
+                        <strong>Ver pontos de coleta</strong>
                     </Link>
                 </main>
             </div>
