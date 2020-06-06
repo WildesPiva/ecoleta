@@ -1,9 +1,6 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { FiArrowLeft, FiCheckCircle, FiSliders} from 'react-icons/fi'
-import { Map, TileLayer, Marker } from 'react-leaflet'
-import { icon as LeafIcon } from 'leaflet'
-
+import { Link } from 'react-router-dom'
+import { FiArrowLeft, FiSliders} from 'react-icons/fi'
 
 import api from '../../services/api'
 import axios from 'axios'
@@ -28,8 +25,6 @@ interface points {
     name: string,
     id: number,
     image_url: string,
-    latitude: number,
-    longitude: number
 }
 
 const CreatePoint = () => {
@@ -38,22 +33,10 @@ const CreatePoint = () => {
     const [points, setPoints] = useState<points[]>([])
     const [ufs, setSetUfs] = useState<string[]>([])
     const [cities, setCities] = useState<string[]>([])
-    const [initialPosition, setInitialPosition] = useState<[number,number]>([0, 0])
-    const [showAlert, setShowAlert] = useState<boolean>(false)
 
     const [selectedUf, setSelectedUf] = useState<string>('')
     const [selectedCity, setSelectedCity] = useState<string>('')
-   
     const [selectedItems, setSelectedItems] = useState<number[]>([])
-
-    const history = useHistory()
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(position => {
-            const { latitude, longitude } = position.coords
-            setInitialPosition([ latitude, longitude ])
-        })
-    },[])
 
     useEffect(() => {
         api.get('items').then(response => setItems(response.data))
@@ -97,10 +80,6 @@ const CreatePoint = () => {
         
     }
 
-    const handleClickMessage = () => {
-        history.push('/')
-    }
-
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault()
 
@@ -117,13 +96,6 @@ const CreatePoint = () => {
 
     return (
         <div id="page-filter-points">
-
-            <div className={showAlert ? "success-message" : "disabled-message"} onClick={handleClickMessage}>
-                <div className="content">
-                    <FiCheckCircle/>
-                    <h1>Cadastro concluído!</h1>
-                </div>
-            </div>
 
             <header>
                 <img src={logo} alt="Ecoleta"/>
